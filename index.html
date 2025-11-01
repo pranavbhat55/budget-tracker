@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Budget Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>💰 Budget Tracker</h1>
+            <p class="subtitle">Manage your finances with ease</p>
+        </header>
+
+        <!-- Dashboard Overview -->
+        <section class="dashboard">
+            <div class="dashboard-card income-card">
+                <div class="card-icon">📈</div>
+                <div class="card-content">
+                    <h3>Total Income</h3>
+                    <p class="amount" id="totalIncome">$0.00</p>
+                </div>
+            </div>
+            <div class="dashboard-card expense-card">
+                <div class="card-icon">📉</div>
+                <div class="card-content">
+                    <h3>Total Expenses</h3>
+                    <p class="amount" id="totalExpenses">$0.00</p>
+                </div>
+            </div>
+            <div class="dashboard-card balance-card">
+                <div class="card-icon">💵</div>
+                <div class="card-content">
+                    <h3>Balance</h3>
+                    <p class="amount" id="currentBalance">$0.00</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters -->
+        <section class="filters">
+            <div class="filter-group">
+                <label for="categoryFilter">Filter by Category:</label>
+                <select id="categoryFilter">
+                    <option value="">All Categories</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="dateFromFilter">From:</label>
+                <input type="date" id="dateFromFilter">
+            </div>
+            <div class="filter-group">
+                <label for="dateToFilter">To:</label>
+                <input type="date" id="dateToFilter">
+            </div>
+            <button class="btn btn-secondary" id="clearFilters">Clear Filters</button>
+            <button class="btn btn-export" id="exportCSV">Export CSV</button>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="charts-section">
+            <div class="chart-container">
+                <h2>Expense Breakdown</h2>
+                <canvas id="expenseChart"></canvas>
+            </div>
+        </section>
+
+        <!-- Transaction Form -->
+        <section class="transaction-form-section">
+            <h2 id="formTitle">Add New Transaction</h2>
+            <form id="transactionForm">
+                <input type="hidden" id="transactionId">
+                <div class="form-group">
+                    <label for="transactionType">Type</label>
+                    <select id="transactionType" required>
+                        <option value="income">Income</option>
+                        <option value="expense">Expense</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transactionAmount">Amount</label>
+                    <input type="number" id="transactionAmount" step="0.01" min="0" required placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label for="transactionCategory">Category</label>
+                    <select id="transactionCategory" required>
+                        <option value="">Select Category</option>
+                        <option value="Food & Dining">Food & Dining</option>
+                        <option value="Transportation">Transportation</option>
+                        <option value="Shopping">Shopping</option>
+                        <option value="Entertainment">Entertainment</option>
+                        <option value="Bills & Utilities">Bills & Utilities</option>
+                        <option value="Healthcare">Healthcare</option>
+                        <option value="Education">Education</option>
+                        <option value="Travel">Travel</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="transactionDate">Date</label>
+                    <input type="date" id="transactionDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="transactionDescription">Description</label>
+                    <input type="text" id="transactionDescription" placeholder="Optional description">
+                </div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary" id="submitBtn">Add Transaction</button>
+                    <button type="button" class="btn btn-secondary" id="cancelBtn" style="display: none;">Cancel</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- Transactions List -->
+        <section class="transactions-section">
+            <h2>Recent Transactions</h2>
+            <div id="transactionsList" class="transactions-list">
+                <p class="empty-state">No transactions yet. Add your first transaction above!</p>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
